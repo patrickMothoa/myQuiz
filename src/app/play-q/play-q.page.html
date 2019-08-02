@@ -1,0 +1,41 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-title>
+            <img style="border-radius: 50%;" src="assets\africa.jpg" width="80" height="80"> African Revolution
+        </ion-title>
+      </ion-toolbar>
+</ion-header>
+
+<ion-content color="secondary">
+    <ion-card style="background-color: rgb(202, 198, 192)" >
+
+      
+        <ion-card-header>
+            <ion-card-title>Play Quiz African Revolution.</ion-card-title>
+            <ion-card-subtitle>
+                <ion-avatar>
+                    <img src="assets\quiza.jpg" width="80" height="80"> 
+                  </ion-avatar> 
+              <ion-button style="width: 100px;" (click)="playQuiz(cal_name)">Play</ion-button>
+            </ion-card-subtitle>
+        </ion-card-header>
+                       <!-- *ngFor = "let ques of getquestion"  // {{ques}} -->
+        <ion-radio-group  *ngFor = "let ALL of ShowAll"(ionChange) = "QuizMe($event)">
+            <ion-list-header >
+              <ion-label>  {{ALL.childSnapshot}} </ion-label>
+            </ion-list-header>
+                      <!--*ngFor = "let answ of getAns" //   {{answ.true}}-->
+            <ion-item  >
+              <ion-label>{{ALL.true}}</ion-label>
+              <ion-radio  slot="start" value="{{ALL.true}}" checked></ion-radio>
+            </ion-item>
+                    <!--*ngFor = "let opt of getOpt" //  {{opt.false}} -->
+            <ion-item >
+              <ion-label>{{ALL.false}}</ion-label>
+              <ion-radio  slot="start" value="{{ALL.false}}" ></ion-radio>
+            </ion-item> 
+          </ion-radio-group>
+
+    </ion-card>
+    <ion-button style="width: 300px;float: right;margin-right: 10px" (click)="Myanswer()" color="primary">Submit Answers</ion-button><br><br>
+</ion-content>

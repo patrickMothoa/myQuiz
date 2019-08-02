@@ -1,0 +1,202 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+        <img style="border-radius: 50%;" src="assets\africa.jpg" width="80" height="80"> African Revolution
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="secondary">
+
+    <ion-card style="background-color: rgb(202, 198, 192)">
+        <ion-card-header>
+            <ion-card-title>African Struggle</ion-card-title>
+            <ion-card-subtitle>
+                <ion-avatar>
+                    <img src="assets\quiz.png" width="80" height="80"> 
+                  </ion-avatar>
+              Know Your Heroes & their Quotes</ion-card-subtitle>
+        </ion-card-header>
+      
+        <ion-card-content>
+            <ion-card-title> Who Said What? Quizz..</ion-card-title>
+
+        <ion-card>
+            <ion-avatar>
+                <img src="assets\biko.jpg" width="80" height="80"> 
+              </ion-avatar>
+            
+             <ion-card-content>
+                <ion-list>
+                    <ion-radio-group (ionChange) = "getBiko($event)">
+                      <ion-list-header style="background-color:cadetblue;">
+                          Bantu Stephen Biko.
+                      </ion-list-header>
+                  
+                      <ion-item>
+                        <ion-label>Action without thought is<br> empty. Thought without<br> action is blind.</ion-label>
+                        <ion-radio value="1" checked></ion-radio>
+                      </ion-item>
+                  
+                      <ion-item>
+                        <ion-label>Being black is not a<br> matter of pigmentation -<br> being black is a reflection<br> of a mental attitude.</ion-label>
+                        <ion-radio value="2"></ion-radio>
+                      </ion-item>
+                  
+                      <ion-item>
+                        <ion-label>We face neither East nor<br> west: we face forward</ion-label>
+                        <ion-radio value="3"></ion-radio>
+                      </ion-item>
+                  
+                    </ion-radio-group>
+                  </ion-list> 
+             </ion-card-content>
+        </ion-card>
+
+        <!--second card for another-->
+        <ion-card>
+            <ion-avatar>
+                <img src="assets\kwame.png" width="50" height="50"> 
+              </ion-avatar>
+            
+             <ion-card-content>
+                <ion-list>
+                    <ion-radio-group (ionChange) = "getNkrumah($event)">
+                      <ion-list-header style="background-color:cadetblue;">
+                          Kwame Nkrumah
+                      </ion-list-header>
+                  
+                      <ion-item>
+                        <ion-label>The most potent weapon<br>  in the hands of the <br> oppressor is the mind of<br>  the oppressed.</ion-label>
+                        <ion-radio value="1" checked></ion-radio>
+                      </ion-item>
+                  
+                      <ion-item>
+                        <ion-label>It is better to die for an<br>  idea that will live, than to<br>  live for an idea that will die.</ion-label>
+                        <ion-radio value="2"></ion-radio>
+                      </ion-item>
+                  
+                      <ion-item>
+                        <ion-label>I am not African because I<br>  was born in Africa but<br>  because Africa was born<br>  in me.</ion-label>
+                        <ion-radio value="3"></ion-radio>
+                      </ion-item>
+                  
+                    </ion-radio-group>
+                  </ion-list> 
+             </ion-card-content>
+        </ion-card>
+        <!--third card for another-->
+        <ion-card>
+            <ion-avatar>
+                <img src="assets\images.jpg" width="50" height="50"> 
+              </ion-avatar>
+            
+             <ion-card-content>
+                <ion-list>
+                    <ion-radio-group (ionChange) = "getNelson($event)">
+                      <ion-list-header style="background-color:cadetblue;">
+                          Nelson Mandela
+                      </ion-list-header>
+                  
+                      <ion-item>
+                        <ion-label>Education is the most <br>powerful weapon which<br> you can use to change the<br> world.</ion-label>
+                        <ion-radio value="1" checked></ion-radio>
+                      </ion-item>
+                  
+                      <ion-item>
+                        <ion-label>Unity can not be taken <br>for granted.</ion-label>
+                        <ion-radio value="2"></ion-radio>
+                      </ion-item>
+                  
+                      <ion-item>
+                        <ion-label>Intellectual growth should<br> commence at birth and<br> cease only at death.</ion-label>
+                        <ion-radio value="3"></ion-radio>
+                      </ion-item>
+                  
+                    </ion-radio-group>
+                  </ion-list> 
+             </ion-card-content>
+        </ion-card>
+        <!--fouth card for another-->
+        <ion-card>
+            <ion-avatar>
+                <img src="assets\lutuli.jpg" width="50" height="50"> 
+              </ion-avatar>
+          
+             <ion-card-content>
+                <ion-list>
+                    <ion-radio-group (ionChange) = "getLithuli($event)">
+                      <ion-list-header style="background-color:cadetblue;">
+                          Chief Albert Luthuli
+                      </ion-list-header>
+                  
+                      <ion-item>
+                        <ion-label>Education is the most <br>powerful weapon which <br>you can use to change<br> the world.</ion-label>
+                        <ion-radio value="1" checked></ion-radio>
+                      </ion-item>
+                  
+                      <ion-item>
+                        <ion-label>May your choices reflect<br> your hopes, not your fears.</ion-label>
+                        <ion-radio value="2"></ion-radio>
+                      </ion-item>
+                  
+                      <ion-item>
+                        <ion-label>You have to learn the <br>rules of the game. And then<br> you have to play better than<br> anyone else.</ion-label>
+                        <ion-radio value="3"></ion-radio>
+                      </ion-item>
+                  
+                    </ion-radio-group>
+                  </ion-list> 
+             </ion-card-content>
+        </ion-card>
+           <!--fiveth card for another-->
+           <ion-card>
+              <ion-avatar>
+                  <img src="assets\Machel.jpg" width="50" height="50">
+                </ion-avatar>
+               
+               <ion-card-content>
+                  <ion-list>
+                      <ion-radio-group (ionChange) = "getSamora($event)">
+                        <ion-list-header style="background-color:cadetblue;">
+                            Samora Machel
+                        </ion-list-header>
+                    
+                        <ion-item>
+                          <ion-label>The greatest glory in living<br> lies not in never falling but<br> in rising every time we fall.</ion-label>
+                          <ion-radio value="1" checked></ion-radio>
+                        </ion-item>
+                    
+                        <ion-item>
+                          <ion-label>The state, the state <br>apparatus is not an <br>abstraction.</ion-label>
+                          <ion-radio value="2"></ion-radio>
+                        </ion-item>
+                    
+                        <ion-item>
+                          <ion-label>A minimum of comfort is<br> necessary for the <br>practice of virtue.</ion-label>
+                          <ion-radio value="3"></ion-radio>
+                        </ion-item>
+                    
+                      </ion-radio-group>
+                    </ion-list> 
+               </ion-card-content>
+          </ion-card>
+        </ion-card-content>
+      </ion-card>
+      <ion-button style="width: 300px;float: right;margin-right: 10px" (click)="answer()" color="primary">Submit Answers</ion-button><br><br>
+
+    <ion-card style="background-color: rgb(202, 198, 192)">
+        <ion-card-title>African Struggle</ion-card-title>
+        <ion-card-subtitle>Know Your Heroes & their Quotes</ion-card-subtitle>
+        <ion-item>
+          <ion-icon name="pin" slot="start"></ion-icon>
+          <ion-label>ion-item in a card, icon left, button right</ion-label>
+          <ion-button fill="outline" slot="end">View</ion-button>
+        </ion-item>
+      
+        <ion-card-content>
+            Teach Them Early What We Learned Late - Unknown...
+        </ion-card-content>
+      </ion-card>
+      
+</ion-content>

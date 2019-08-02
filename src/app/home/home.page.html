@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+        <img style="border-radius: 50%;" src="assets\africa.jpg" width="80" height="80"> African Revolution
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="secondary">
+<ion-button style="width: 100px; float: right; margin-right: 10px" (click)="logout()">Log Out</ion-button>
+  <ion-card style="background-color: rgb(202, 198, 192)">
+    <ion-card-header>
+      <ion-avatar>
+        <img src="assets\Machel.jpg" width="50" height="50">
+      </ion-avatar>
+
+      <ion-card-title>Welcome to African Revolution</ion-card-title>
+      <ion-card-subtitle>Teach Them Early What We Learned Late...</ion-card-subtitle>
+    </ion-card-header>
+
+  <ion-card-content>
+     <h4>No Quiz Score? Click below to Take Quiz...</h4>
+       <div id="getcat">
+     <ion-button style="width: 400px;" (click)="GetQuiz()">
+      <ion-item >
+        <ion-icon name="walk" slot="start"></ion-icon>
+        <ion-label>Click here to Play Quiz.</ion-label>
+      </ion-item></ion-button>
+       </div>
+    </ion-card-content>
+    
+    <ion-card>
+     <table>
+         <tr>
+           <th> Play-Quiz </th>
+           <th></th>
+         </tr>
+
+         <tr *ngFor = "let catek of getKategories">
+           <td> {{catek.cal_name}} </td>
+           <td><ion-button style="width: 200px;" color="primary" routerLink='/play-q' (click)="playQuiz(catek.cal_key)" >Play</ion-button></td>
+         </tr>
+     </table>
+    </ion-card>
+    
+
+  </ion-card>
+  <ion-button style="width: 300px;float: right;margin-right: 10px" routerLink='/myscores' (click)="submitScore()" color="primary">Check Scores</ion-button><br><br>
+</ion-content>

@@ -1,0 +1,24 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-title>
+            <img style="border-radius: 50%;" src="assets\africa.jpg" width="80" height="80"> African Revolution Scores.
+        </ion-title>
+      </ion-toolbar>
+</ion-header>
+
+<ion-content color="secondary">
+    <ion-button style="width: 100px;margin-left: 10px" routerLink='/home'>Back</ion-button>
+      <ion-card style="background-color: rgb(202, 198, 192)">
+        <ion-card-header>
+          <ion-avatar>
+            <img src="assets\quiz.png" width="50" height="50">
+          </ion-avatar>
+    
+          <ion-card-title>Quiz Scores</ion-card-title>
+            <div *ngFor = "let skoro of myscores">
+                   {{skoro.initial}} :
+                   {{skoro.scores}}
+            </div>
+        </ion-card-header>
+      </ion-card>
+</ion-content>

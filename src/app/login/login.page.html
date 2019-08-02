@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title><img style="border-radius: 50%;" src="assets\africa.jpg" width="80" height="80">Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="secondary">
+    <ion-card style="background-color: rgb(202, 198, 192)">
+      <ion-card-header>
+        <ion-card-title> African Revolution </ion-card-title>
+      </ion-card-header>
+    
+      <ion-card-content>
+     
+        Email <ion-input [(ngModel)]="email" placeholder="fanamoore@gmail.com"></ion-input><br>
+        Password <ion-input [(ngModel)]="password" type="Password" required></ion-input>
+      </ion-card-content>
+    </ion-card>
+    <a style="margin-left: 20px" routerLink='/register'>Create new Account</a>
+        <ion-button style="float: right; width: 120px;margin-right: 10px" (click)="login()" routerLink='/home' color="primary">Login</ion-button><br>
+         <ion-button style=" text-align: center;width: 300px" (click)="resetpass()" color="primary">Forgort Passsword</ion-button><br><br>
+  </ion-content>

@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title><img style="border-radius: 50%;" src="assets\africa.jpg" width="80" height="80">register</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="secondary">
+    <ion-card style="background-color: rgb(238, 230, 218)">
+        <ion-card-header>
+          <ion-card-title>User Information.</ion-card-title>
+        </ion-card-header>
+
+    <ion-card-content>
+    Name <ion-input [(ngModel)]="name" placeholder="enter name" ></ion-input><br>
+    Age <ion-input [(ngModel)]="age" placeholder="enter age" ></ion-input><br>
+    <ion-list>
+      <ion-radio-group (ionChange) = "getGender($event)">
+        <ion-list-header>
+          <ion-label>Gender</ion-label>
+        </ion-list-header>
+    
+        <ion-item>
+          <ion-label>Male</ion-label>
+          <ion-radio  slot="start" value=1 checked></ion-radio>
+        </ion-item>
+    
+        <ion-item>
+          <ion-label>Female</ion-label>
+          <ion-radio slot="start" value=2></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>Others</ion-label>
+          <ion-radio slot="start" value=3></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </ion-list><br>
+    Email <ion-input [(ngModel)]="email" placeholder="enter email" ></ion-input><br>
+    Password <ion-input [(ngModel)]="password"  type="password"></ion-input>
+    
+  </ion-card-content>
+</ion-card>
+<a style="margin-left: 20px" routerLink='/login'> Back to Login..</a>
+<ion-button style="float: right; width: 150px;margin-right: 10px" (click)="register()" color="primary">submit</ion-button><br>
+</ion-content>
