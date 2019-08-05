@@ -15,23 +15,25 @@ export class QuizerService {
 
  private CatListing = [];
  private myScores = [];
- private myAnswers = [];
  private Questions =[];
  private Answers = [];
  private Options = [];
 
  private showAll = [];
+ score = 0;
  cal_name;
  cal_age
 
  catKey
+/////
+_quiz: any;
+quizScore: number = 0;
+private myAnswers = [];
  ////
  childtrue;childfalse
  childKey
 //for scores
-scores;
-initialInput;
-correct;incorrect;totals
+userAnswers
   constructor() { }
 
    //user logins
@@ -140,69 +142,56 @@ correct;incorrect;totals
                   console.log();
                 })
               })
+              // .then((score)=>{       //// strat here attempt
+              //   console.log(score)
+              //   console.log(score['Scores'].key)
+            
+              //   this.catKey = score['Scores'].key;
+              //   var childKey = snapshot.key;  
+
+              //   for(var i=0; i < childKey.length; i++){
+              //   var k = childKey[i];
+              //   var score = Scores[k].scores;
+              //   }
+
+            
+              //   firebase.database().ref('Scores/' + this.catKey).set({
+              //     score : score
+
+              //   }, (error)=>{
+              //     if(error){
+              //        //
+              //        console.log(error)
+              //     }else{
+              //      //
+              //      console.log("data is saved")
+              //     }
+              //   })
+              // });
                   console.log(this.Answers);
 
         /////////////////////////////////////////////////////////////////////////////////////////    
             }
 
-      
-
-  Myanswer(){
-    var ans = firebase.database().ref().child("Answers");
-    ans.on ("child_added", snap =>{
-      this.correct = snap.child("correct").val();
-      this.incorrect = snap.child("incorrect").val();
-      this.totals = snap.child("totals").val();
-
-       //for creating database remove after use
-       var database = firebase.database();
-       var ref = database.ref('Answers');
-
-      var data = {
-                 correct : "2",
-                 incorrect : "3",
-                 totals : "2"
-              }
-      ref.push(data);
-      //end here
-
-      this.myAnswers.push({
-         correct:this.correct,
-         incorrect:this.incorrect,
-         totals:this.totals
-      })
-      console.log(this.myAnswers)
-   });
+  submitScore(userAnswers,Answers){
+    if(userAnswers == Answers){
+      this.score++;
+      console.log(this.score++)
+    }
   }
 
-  submitScore(){
-    var ref = firebase.database().ref().child("Scores");
-    ref.on ("child_added", snap =>{
-       this.initialInput = snap.child("name").val();
-       this.scores = snap.child("score").val();
-
-       //for creating database remove after use
-       var database = firebase.database();
-       var ref = database.ref('Scores');
-
-      var data = {
-                 name : "fanaMoore",
-                 score : "4"
-              }
-      ref.push(data);
-      //end here
-
-       this.myScores.push({
-          initialInput:this.initialInput,
-          scores:this.scores
-       })
-
-       console.log(this.myScores)
-    });
- }
+ calculateScore() {
+ // this.quizScore = (this.Answers) * 1 ;
+  // this._quizService.quizDone(true);
+  // this._quizService.quizScore(this.quizScore);
+}
 
   gotData(){
      return this.CatListing;
+  }
+
+  gotTotal(){
+    return this.score;
   }
   
   getQuestions(){

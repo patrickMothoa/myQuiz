@@ -25,8 +25,8 @@ export class HomePage {
       this.quizservice.GetQuiz();
   }
 
-  submitScore(){
-    this.quizservice.submitScore();
+  submitScore(userAnswers,Answers){
+    this.quizservice.submitScore(userAnswers,Answers);
   }
 
   playQuiz(key){
