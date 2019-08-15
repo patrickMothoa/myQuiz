@@ -8,16 +8,16 @@
 
 <ion-content color="secondary">
     <ion-button style="width: 100px;margin-left: 10px" routerLink='/home'>Back</ion-button>
-      <ion-card style="background-color: rgb(202, 198, 192)">
+      <ion-card color="primary">
         <ion-card-header>
           <ion-avatar>
             <img src="assets\quiz.png" width="50" height="50">
           </ion-avatar>
     
           <ion-card-title>Quiz Scores</ion-card-title>
-            <div *ngFor = "let skoro of myscores">
-                   {{skoro.initial}} :
-                   {{skoro.scores}}
+          <ion-button (click)="GetScores()">Scores</ion-button>
+            <div *ngFor = "let skoro of PlayerScores">
+                PlayerScore: {{skoro}}
             </div>
         </ion-card-header>
       </ion-card>

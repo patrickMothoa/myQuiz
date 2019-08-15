@@ -10,7 +10,7 @@
     
     <ion-card style="background-color: rgb(202, 198, 192)" >
 
-        <h2 style="float: right; color: whitesmoke"> Score</h2><br>
+        <h2 style="float: right; color: whitesmoke"></h2><br>
         <ion-card-header>
             <ion-card-title>Play Quiz African Revolution.</ion-card-title>
             <ion-card-subtitle>
@@ -20,24 +20,35 @@
               <ion-button style="width: 100px;" (click)="playQuiz(cal_name)">Play</ion-button>
             </ion-card-subtitle>
         </ion-card-header>
-        <ion-card style="background-color: khaki">
+        <ion-card color="primary">
 
-        <ion-radio-group  *ngFor = "let ALL of ShowAll"(ionChange) = "QuizMe($event)">
+        <ion-radio-group  *ngFor = "let ALL of ShowAll" (ionChange) = "QuizMe($event,ALL.Quizques)">
             <ion-list-header >
-              <ion-label>  {{ALL.childSnapshot}} </ion-label>
+              <ion-label>  {{ALL.counter}}. {{ALL.Quizques}} </ion-label>
             </ion-list-header>
                       
-            <ion-item  >
-              <ion-label>{{ALL.true}}</ion-label>
-              <ion-radio  slot="start" value="{{ALL.true}}" ></ion-radio>
+            <ion-item *ngFor = "let MyAnswers of ALL.QuizAns"  >
+              <ion-label>{{MyAnswers}}</ion-label>
+              <ion-radio  slot="start" value="{{MyAnswers}}"></ion-radio>
             </ion-item>
-                    
-            <ion-item >
-              <ion-label>{{ALL.false}}</ion-label>
-              <ion-radio  slot="start" value="{{ALL.false}}" checked></ion-radio>
-            </ion-item> 
           </ion-radio-group>
         </ion-card>
     </ion-card>
-     <ion-button style="width: 300px;float: right;margin-right: 10px" (click)="playQuiz(); submitScore(Answers,ALL.true); presentToast()"  routerLink='/scores'  color="primary">Submit Answers</ion-button><br> 
-</ion-content>
+     <!-- <ion-button style="width: 300px;float: right;margin-right: 10px" (click)="playQuiz();UserAnswers(UserAnswers, QuizAns); submitScore(); presentToast()"  routerLink='/scores'  color="primary">Submit Answers</ion-button><br>  -->
+     <ion-button style="width: 300px;float: right;margin-right: 10px" (click)="calculateScore(); presentToast()" color="primary">Submit Answers</ion-button><br> 
+
+     <!-- <ion-card color="primary" >
+      <ion-card-header>
+        <ion-card-title>Players Results. </ion-card-title>
+        <ol *ngFor = "let user of UserInputz">
+          <p>
+              Question:  {{user. Quizques}}<br>
+              Answers:  {{user.MyAnswers }}<br>
+              Score:  {{user. score}}<br>
+              Results:  {{user.Allresults}}<br>
+          </p>
+        </ol>
+      </ion-card-header>
+    </ion-card> -->
+
+    </ion-content>

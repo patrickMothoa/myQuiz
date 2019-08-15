@@ -20,12 +20,24 @@ export class QuizerService {
  private Options = [];
 
  private showAll = [];
- score = 0;
+ private PlayerScores = [];
+ 
  cal_name;
  cal_age
 
  catKey
 /////
+OptionMe
+Counter = 0;
+score
+
+Quizques
+QuizAns
+Quizvalues
+////
+
+///////
+
 _quiz: any;
 quizScore: number = 0;
 private myAnswers = [];
@@ -35,6 +47,14 @@ private myAnswers = [];
 //for scores
 userAnswers
   constructor() { }
+
+   getUser(){
+     return this.userId;
+   }
+
+  getkeya(){
+    return this. catKey;
+  }
 
    //user logins
    SignIn(email, password){
@@ -48,37 +68,37 @@ userAnswers
     });
   }
 
-   //user regisetering
-   SignUp(email, password, name , age, gender){
-    firebase.auth().createUserWithEmailAndPassword(email, password).catch((error)  => {
-    // Handle Errors here.
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    // ...
-  }).then((user)=>{
-    console.log(user)
-    console.log(user['user'].uid)
+//user regisetering
+SignUp(email, password, name , age, gender){
+  firebase.auth().createUserWithEmailAndPassword(email, password).catch((error)  => {
+  // Handle Errors here.
+  var errorCode = error.code;
+  var errorMessage = error.message;
+  // ...
+}).then((user)=>{
+  console.log(user)
+  console.log(user['user'].uid)
 
-    this.userId = user['user'].uid;
-    this.userEmail = user['user'].email;
+  this.userId = user['user'].uid;
+  this.userEmail = user['user'].email;
 
-    firebase.database().ref('user/' + this.userId).set({
-      name : name,
-      email : this.userEmail,
-      age : age,
-      gender: gender,
-    }, (error)=>{
-      if(error){
-         //
-         console.log(error)
-      }else{
+  firebase.database().ref('user/' + this.userId).set({
+    name : name,
+    email : this.userEmail,
+    age : age,
+    gender: gender,
+  }, (error)=>{
+    if(error){
        //
-       console.log("data is saved")
-      }
-    })
-  });
+       console.log(error)
+    }else{
+     //
+     console.log("data is saved")
     }
-
+  })
+});
+  }
+///////////////   getting categories from db //////////////////
   GetQuiz(){
 
     var checking = firebase.database().ref().child("Category");
@@ -97,101 +117,109 @@ userAnswers
   }
 
   
-    //////////////
+    ///// use this key to referennce and get correct questions on cat id ////
     setQuiz(key){
       this.catKey = key
     }
     //////////////
   //for questions
       playQuiz(){
-        //////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////  retriving values from my database   /////////////
               var rootRef = firebase.database().ref("QuizAnswers/" + this.catKey)
               rootRef.once('value', (snapshot) =>{
+                const value = snapshot.val();
+
                 var childKey = snapshot.key;
-                  console.log(childKey)
 
-                snapshot.forEach((childSnapshot) =>
-                {
-                  this.childfalse = "";
-                  this.childtrue = "";
+                for (const key in value){
+                  this.Counter++;
+                  this.showAll.push({
+                    counter: this.Counter,
+                    key: key,
+                    Quizques  : key,
+                    QuizAns : Object.keys(value[key]),
+                    Quizvalues : Object.keys(value[key])
 
-                   this.childKey = childSnapshot.key;
-                  console.log(childSnapshot.key)
-                  console.log(childKey)
+                   // OptionMe: Object.keys(value[key])
+                  });
+                    console.log(this.showAll)
+                    console.log(key);
+                    console.log(value)
+                  //  this.OptionMe = Object.keys(value[key]);
+                }
+              });
 
-              this.childfalse = childSnapshot.child("false").val();
-              this.childtrue = childSnapshot.child("true").val();
+              ///////////////////////////////////////////////// Legends Code //////
+              //  var childKey = snapshot.key;
+               //   console.log(childKey)
+              //   snapshot.forEach((childSnapshot) =>
+              //   {
+              //     this.childfalse = "";
+              //     this.childtrue = "";
+              //      this.childKey = childSnapshot.key;
+              //     console.log(childSnapshot.key)
+              //     console.log(childKey)
 
+              // this.childfalse = childSnapshot.child("false").val();
+              // this.childtrue = childSnapshot.child("true").val();
 
-                   this.Questions = [];
-                  this.Questions.push({childSnapshot:this.childKey})
-                  console.log(this.Questions);
+              //      this.Questions = [];
+              //     this.Questions.push({childSnapshot:this.childKey})
+              //     console.log(this.Questions);
 
-                  this.Answers.splice(0,1)
-                  this.Answers = [];
-                  this.Answers.push({
-                    true: this.childtrue
-                  })
-                  this.Options.splice(0,1)
-                  this.Options=[]
-                  this.Options.push({false:this.childfalse})
+              //     this.Answers.splice(0,1)
+              //     this.Answers = [];
+              //     this.Answers.push({
+              //       true: this.childtrue
+              //     })
+              //     this.Options.splice(0,1)
+              //     this.Options=[]
+              //     this.Options.push({false:this.childfalse})
 
-                  this.showAll.push({childSnapshot:this.Questions[0].childSnapshot,true:this.Answers[0].true,false:this.Options[0].false})
-                   console.log(this.showAll) 
-
-                  console.log();
-                })
-              })
-              // .then((score)=>{       //// strat here attempt
-              //   console.log(score)
-              //   console.log(score['Scores'].key)
-            
-              //   this.catKey = score['Scores'].key;
-              //   var childKey = snapshot.key;  
-
-              //   for(var i=0; i < childKey.length; i++){
-              //   var k = childKey[i];
-              //   var score = Scores[k].scores;
-              //   }
-
-            
-              //   firebase.database().ref('Scores/' + this.catKey).set({
-              //     score : score
-
-              //   }, (error)=>{
-              //     if(error){
-              //        //
-              //        console.log(error)
-              //     }else{
-              //      //
-              //      console.log("data is saved")
-              //     }
-              //   })
-              // });
-                  console.log(this.Answers);
-
-        /////////////////////////////////////////////////////////////////////////////////////////    
+              //     this.showAll.push({childSnapshot:this.Questions[0].childSnapshot,true:this.Answers[0].true,false:this.Options[0].false})
+              //      console.log(this.showAll) 
+              // })////////////////////////////////////////////////////////////////////////////////////////
+            //  })
+              
+                  console.log(this.OptionMe); 
             }
 
-  submitScore(userAnswers,Answers){
-    if(userAnswers == Answers){
-      this.score++;
-      console.log(this.score++)
-    }
+  /////////////// this  moved from play.ts ///////////////////////////////////   
+  submitScore(UserAnswers, QuizAns){
+
   }
 
- calculateScore() {
- // this.quizScore = (this.Answers) * 1 ;
-  // this._quizService.quizDone(true);
-  // this._quizService.quizScore(this.quizScore);
-}
+  UserAnswers( QuizAns: boolean,Options : boolean ) {	
+
+      console.log(this.Answers)
+    }
+
+
+
+    //////////////// for retriving scores from db to display in myscores.page//////////
+    GetScores(){
+      var checking = firebase.database().ref().child("Scores");
+      checking.on("child_added", snap =>{
+         this.score = snap.child("StageResult").val();
+         let key = snap.key 
+         console.log("Heres your key: " + key)
+         console.log(this.score)
+         this.PlayerScores.push({
+          StageResult: this. score,
+          cal_key: key
+      })
+        console.log(this.PlayerScores)
+      });
+   
+    }
+    ////////
 
   gotData(){
      return this.CatListing;
   }
 
   gotTotal(){
-    return this.score;
+    return this.PlayerScores;
   }
   
   getQuestions(){

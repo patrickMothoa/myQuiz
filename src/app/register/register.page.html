@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content color="secondary">
-    <ion-card style="background-color: rgb(238, 230, 218)">
+    <ion-card color="primary">
         <ion-card-header>
           <ion-card-title>User Information.</ion-card-title>
         </ion-card-header>
@@ -14,8 +14,8 @@
     Name <ion-input [(ngModel)]="name" placeholder="enter name" ></ion-input><br>
     Age <ion-input [(ngModel)]="age" placeholder="enter age" ></ion-input><br>
     <ion-list>
-      <ion-radio-group (ionChange) = "getGender($event)">
-        <ion-list-header>
+      <ion-radio-group  (ionChange) = "getGender($event)">
+        <ion-list-header >
           <ion-label>Gender</ion-label>
         </ion-list-header>
     
@@ -35,7 +35,7 @@
       </ion-radio-group>
     </ion-list><br>
     Email <ion-input [(ngModel)]="email" placeholder="enter email" ></ion-input><br>
-    Password <ion-input [(ngModel)]="password"  type="password"></ion-input>
+    Password <ion-input [(ngModel)]="password"  type="password" style="background-color: #95b911;border: solid  2px;width: 300px; border-radius: 10px 10px "></ion-input>
     
   </ion-card-content>
 </ion-card>

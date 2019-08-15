@@ -8,15 +8,15 @@ import { QuizerService } from '../quizer.service';
 })
 export class MyscoresPage implements OnInit {
 
-  myscores = [];
+  PlayerScores = [];
   constructor(public quizservice : QuizerService) {
-    this.myscores = this.quizservice.getScores();
+    this.PlayerScores = this.quizservice.gotTotal();
    }
 
   ngOnInit() {
   }
 
-  getScores(){
-    this.quizservice.getScores();
+  GetScores(){
+    this.quizservice.GetScores();
   }
 }

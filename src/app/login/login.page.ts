@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { QuizerService } from '../quizer.service';
 import { AlertController } from '@ionic/angular';
+// import {FormsModule} from '@angular/forms';
+// import {LoadingController, AlertController } from '@ionic/angular';
+// import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+// import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,9 +13,22 @@ import { AlertController } from '@ionic/angular';
 })
 export class LoginPage implements OnInit {
 
-  email 
-  password
-    constructor( public quizservice : QuizerService, public alertController: AlertController) { }
+// public loginForm: FormGroup;
+// public loading: HTMLIonLoadingElement;
+
+  email :string ="";
+  password : string ="";
+    constructor( public quizservice : QuizerService, public alertController: AlertController,) {
+      // , public formBuilder: FormBuilder,public loadingCtrl: LoadingController,  private router: Router
+      // this.loginForm = this.formBuilder.group({
+      //   email: ['',
+      //     Validators.compose([Validators.required, Validators.email])],
+      //   password: [
+      //     '',
+      //     Validators.compose([Validators.required, Validators.minLength(8)]),
+      //   ],
+      // });
+     }
   
     ngOnInit() {
     }
