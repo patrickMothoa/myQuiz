@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar color="primary">
+      <ion-title><img style="border-radius: 50%; margin-left: 10px;text-align: center" src="assets\africa.jpg" width="80" height="80">profile.</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content  color="secondary">
+  <ion-card color="primary">
+      <ion-button style="float: center; width: 200px; margin-left: 10px" click="PhotosLib()" color="primary">PhotoLibrary</ion-button><br>
+      <ion-button  style="margin-left:10px; background-color: #97BC62FF " (click)="Profilepic()" >
+          <ion-icon  slot="icon-only" name="camera"></ion-icon>
+        </ion-button> <br>
+        <!-- <img [src] = "proPic"  *ngIf= "proPic" > -->
+    <ion-avatar>   
+         <img [src] = "proPic"  *ngIf= "proPic" >
+    </ion-avatar> 
+
+    <div *ngFor = "let mypro of Userprofilez">
+      Name: {{mypro.Name }}<br>
+      Age: {{mypro.Age}} <br>
+      Gender: {{mypro.Gender}}<br>
+      Email : {{mypro. Email}}<br>
+     </div>
+
+    </ion-card>
+    
+     
+
+    
+  </ion-content>

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import * as firebase from 'firebase'
+import * as firebase from 'firebase';
 import { Key } from 'protractor';
 import { TouchSequence } from 'selenium-webdriver';
 
@@ -13,14 +13,17 @@ export class QuizerService {
  userId
  userEmail
 
+ private myResults = []
  private CatListing = [];
  private myScores = [];
  private Questions =[];
  private Answers = [];
+
  private Options = [];
 
  private showAll = [];
- private PlayerScores = [];
+ PlayerScores = [];
+ Userprofiles = [];
  
  cal_name;
  cal_age
@@ -35,9 +38,15 @@ Quizques
 QuizAns
 Quizvalues
 ////
-
+finalscore
 ///////
+names
+ages
+genders
+emails
 
+
+/////
 _quiz: any;
 quizScore: number = 0;
 private myAnswers = [];
@@ -58,44 +67,45 @@ userAnswers
 
    //user logins
    SignIn(email, password){
-    firebase.auth().signInWithEmailAndPassword(email, password).catch((error) => {
+   return firebase.auth().signInWithEmailAndPassword(email, password).then((result)=>{
+      if(result){
+       // console.log("user is logged in")
+        return result;
+      }
+     
+    }).catch((error) => {
       // Handle Errors here.
       var errorCode = error.code;
       var errorMessage = error.message;
+      return errorMessage;
       // ...
-    }).then((result)=>{
-      console.log("user is logged in")
     });
   }
 
 //user regisetering
 SignUp(email, password, name , age, gender){
-  firebase.auth().createUserWithEmailAndPassword(email, password).catch((error)  => {
+  return firebase.auth().createUserWithEmailAndPassword(email, password).then((user)=>{
+    if (user) {
+      console.log(user)
+    console.log(user['user'].uid)
+  
+    this.userId = user['user'].uid;
+    this.userEmail = user['user'].email;
+  
+    firebase.database().ref('user/' + this.userId).set({
+      name : name,
+      email : email,
+      age : age,
+      gender: gender,
+    })
+    return user;
+    }
+  }).catch((error)  => {
   // Handle Errors here.
   var errorCode = error.code;
   var errorMessage = error.message;
+  return errorMessage;
   // ...
-}).then((user)=>{
-  console.log(user)
-  console.log(user['user'].uid)
-
-  this.userId = user['user'].uid;
-  this.userEmail = user['user'].email;
-
-  firebase.database().ref('user/' + this.userId).set({
-    name : name,
-    email : this.userEmail,
-    age : age,
-    gender: gender,
-  }, (error)=>{
-    if(error){
-       //
-       console.log(error)
-    }else{
-     //
-     console.log("data is saved")
-    }
-  })
 });
   }
 ///////////////   getting categories from db //////////////////
@@ -138,7 +148,7 @@ SignUp(email, password, name , age, gender){
                     key: key,
                     Quizques  : key,
                     QuizAns : Object.keys(value[key]),
-                    Quizvalues : Object.keys(value[key])
+                    Quizvalues : Object.values(value[key])
 
                    // OptionMe: Object.keys(value[key])
                   });
@@ -193,29 +203,122 @@ SignUp(email, password, name , age, gender){
 
       console.log(this.Answers)
     }
-
-
+////////////// xxxx
+getUserId() {
+  var users = firebase.auth().currentUser;
+  var name, email, photoUrl, uid, emailVerified;
+  if (users != null) {
+    name = users.displayName;
+    email = users.email;
+    uid = users.uid;
+  }
+  return uid
+ }
+/////////////////// geting questions and ans all
+allResults(userId) {
+  this.Counter = 0;
+  let resultsquestion;
+  let gameID;
+  let values;
+  this.clearArray(this.myResults);
+ return firebase.database().ref().child('Results/' + userId + name).once('value').then( (snapshot) => {
+      const values = snapshot.val();
+      console.log(values);
+      return snapshot.val();
+    });
+ }
+ ///////////////////////////////////////////////
+///////////////// get all play
+    GetAll(){
+      var checking = firebase.database().ref().child('Results/' + this.userId + '/'+ this.catKey)
+      checking.on('value', (snapshot) =>{
+        const value = snapshot.val();
+        for (const key in value){
+          this.Counter++;
+          this.Options.push({
+            counter: this.Counter,
+            key: key,
+            Quizques  : key,
+            StageResult : this.quizScore,
+           // MyAnswers : Object.keys(value[key]),
+            score : Object.keys(value[key]),
+  
+          }); 
+        }
+      });
+    }
 
     //////////////// for retriving scores from db to display in myscores.page//////////
     GetScores(){
-      var checking = firebase.database().ref().child("Scores");
-      checking.on("child_added", snap =>{
-         this.score = snap.child("StageResult").val();
-         let key = snap.key 
-         console.log("Heres your key: " + key)
-         console.log(this.score)
-         this.PlayerScores.push({
-          StageResult: this. score,
-          cal_key: key
-      })
-        console.log(this.PlayerScores)
+      var checking = firebase.database().ref().child('OurScores/'+ this.userId + '/'+ this.catKey )
+      checking.on('value', (snapshot) =>{
+        let Counter;
+        const keys = snapshot.val()
+        console.log(keys)
+
+        // for (const key  in keys ){
+        //   console.log(Object.values(keys[key]))
+        //   this.PlayerScores.push({
+        //     key:key,
+        //     gameid: key,
+        //     catId : Object.keys(keys[key]),
+        //     score: Object.values(keys[key])
+        //   }); 
+        // }
+
+        /////////////
+        for (let key in keys) {
+          Counter = 1;
+          var categ = key
+          for (let key2 in keys[key]) {
+            for (let key3 in keys[key][key2]) {
+              this.PlayerScores.push({
+                counter: Counter++,
+                catId: categ,
+                totalScore : key3,
+                options: (keys[key][key2][key3]),
+              });
+            }
+          }
+          console.log(this.PlayerScores);
+        }
       });
-   
     }
-    ////////
+
+    ///////// user profiles
+    QuizProfiles(){
+      this.userId = this.getUser()
+            const newRef = firebase.database().ref('user/' + this.userId)
+            newRef.on('value', (snapshot) =>{
+              const users = snapshot.val();
+               
+              this.names = users.name;
+              this.ages = users.age;
+              this.genders = users.gender;
+              this.emails = users.email;
+              
+                this.Userprofiles.push({
+                 Name: this.names,
+                 Age: this.ages,
+                 Gender : this.genders,
+                 Email : this.emails
+                })    
+            })
+            return this.Userprofiles
+          }
+
+  clearArray(array) {
+            for (let i = 0; i < array.length; i++) {
+              array.splice(i);
+     }
+ }
 
   gotData(){
      return this.CatListing;
+  }
+
+  Getprofiles(){
+    return this.Userprofiles;
   }
 
   gotTotal(){

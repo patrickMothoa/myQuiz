@@ -25,6 +25,10 @@ export class HomePage {
       this.quizservice.GetQuiz();
   }
 
+  QuizProfiles(){
+    this.quizservice. QuizProfiles();
+  }
+
   submitScore(userAnswers,Answers){
     this.quizservice.submitScore(userAnswers,Answers);
   }

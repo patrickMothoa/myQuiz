@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { QuizerService } from '../quizer.service';
-import { AlertController } from '@ionic/angular';
-// import {FormsModule} from '@angular/forms';
-// import {LoadingController, AlertController } from '@ionic/angular';
-// import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-// import { Router } from '@angular/router';
+import { AlertController, ToastController } from '@ionic/angular';
+import {LoadingController } from '@ionic/angular';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,31 +12,61 @@ import { AlertController } from '@ionic/angular';
 })
 export class LoginPage implements OnInit {
 
-// public loginForm: FormGroup;
-// public loading: HTMLIonLoadingElement;
+public loginForm: FormGroup;
+public loading: HTMLIonLoadingElement;
 
   email :string ="";
   password : string ="";
-    constructor( public quizservice : QuizerService, public alertController: AlertController,) {
-      // , public formBuilder: FormBuilder,public loadingCtrl: LoadingController,  private router: Router
-      // this.loginForm = this.formBuilder.group({
-      //   email: ['',
-      //     Validators.compose([Validators.required, Validators.email])],
-      //   password: [
-      //     '',
-      //     Validators.compose([Validators.required, Validators.minLength(8)]),
-      //   ],
-      // });
+    constructor( public quizservice : QuizerService, public alertController: AlertController, public formBuilder: FormBuilder,public loadingCtrl: LoadingController,  private router: Router, public toastController: ToastController) {
+      
+      this.loginForm = this.formBuilder.group({
+        email: ['',
+          Validators.compose([Validators.required, Validators.email])],
+        password: [
+          '',
+          Validators.compose([Validators.required, Validators.minLength(8)]),
+        ],
+      });
      }
   
     ngOnInit() {
     }
   
     login(email, password){
-      this.quizservice.SignIn(this.email, this.password)
+      this.quizservice.SignIn(this.email, this.password).then((result)=>{
+        if(result.operationType == "SignIn"){
+          this.router.navigate(['/home']);
+          this.presentToast();
+        }
+        else{
+             this.presentAlert(result);
+        }
+       
+      })
     }
   
-  
+    async presentAlert(user) {
+      const alert = await this.alertController.create({
+        header: 'incorrect credentials',
+        subHeader: 'Login',
+        message: user,
+        buttons: ['OK']
+      });
+    
+      await alert.present();
+    }
+    
+    async presentToast() {
+      const toast = await this.toastController.create({
+        message: 'logged in succesfully.',
+        duration: 5000,
+        color: 'secondary',
+        position: 'top'
+      });
+      toast.present();
+    }
+
+    ///// alert for password reset function ///////////
     async resetpass() {
       const alert = await this.alertController.create({
         header: 'reset Password',
@@ -68,5 +97,27 @@ export class LoginPage implements OnInit {
     
         await alert.present();
       }
+        // form hub
+      //    constructor (formBuilders : FormBuilder){
+  //    this.myForm = formBuilders.group({
+  //     email : ["",Validators.email],
+  //     password : ['',Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')],
+  //   });
+
+  //   const confirmPasswordControl = new FormControl('', {
+  //    validators: sameValueAs(this.myForm, 'password')
+  //  });
+
+  //  this.myForm.addControl('passconfirm', confirmPasswordControl); 
+
+  //  function sameValueAs(group: FormGroup, controlName: string): ValidatorFn {
+  //    return (control: FormControl) => {
+  //          const myValue = control.value;
+  //          const compareValue = group.controls[controlName].value;
+   
+  //          return (myValue === compareValue) ? null : {valueDifferentFrom:controlName};
+   
+  //    };
+  //  }
 
 }

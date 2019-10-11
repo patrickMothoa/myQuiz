@@ -6,11 +6,26 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content style="border-bottom: #2a700e solid 40px " color="secondary">
-<ion-button style="width: 100px; float: right; margin-right: 20px" routerLink='/login' (click)="logout()">Log Out</ion-button><br>
-<img style="border-radius: 50%;margin-left: 0px;"  src="assets\Machel.jpg" width="70" height="80">
+<ion-content  color="secondary">
+    <ion-toolbar style="text-align: center" color="secondary">
+        <ion-title>
+          <ion-button   routerLink='/profiles' color="primary">
+        Profile
+        </ion-button>
+
+        <ion-button routerLink='/myscores' color="primary">
+        Scores
+        </ion-button>
+        <ion-button routerLink='/login' (click)="logout()" color="primary">
+        LogOut
+        </ion-button>
+        </ion-title>
+
+    </ion-toolbar><br>
+<br>
+<img style="border-radius: 50%;margin-left: 50px;"  src="assets\Machel.jpg" width="50" height="60">
 <img  style="text-align: center"   src="assets\caf.png" width="80" height="80">
-<img style="border-radius: 50%;text-align: right"  src="assets\egypt.jpg" width="70" height="80">
+<img style="border-radius: 50%;text-align: right"  src="assets\egypt.jpg" width="50" height="60">
 
   <ion-card  color="primary">
     <ion-card-header>
@@ -23,8 +38,8 @@
        <div id="getcat">
      <ion-button style="width: 300px;" (click)="GetQuiz()">
       <ion-item >
-        <ion-icon name="walk" slot="start"></ion-icon>
         <ion-label>Click here to Play.</ion-label>
+        <ion-icon name="Play" slot="start"></ion-icon>
       </ion-item></ion-button>
        </div>
     </ion-card-content>
@@ -32,18 +47,16 @@
     <ion-card color="secondary">
      <table>
          <tr>
-           <th> Play-Quiz </th>
+           <th> Quiz </th>
            <th></th>
          </tr>
 
          <tr *ngFor = "let catek of getKategories">
            <td> {{catek.cal_name}} </td>
-           <td><ion-button style="width: 200px;" color="primary" routerLink='/play-q' (click)="playQuiz(catek.cal_key)" >Play</ion-button></td>
+           <td><ion-button style="width: 150px;" color="primary" routerLink='/play-q' (click)="playQuiz(catek.cal_key)" >Play</ion-button></td>
          </tr>
      </table>
     </ion-card>
     
-
-  </ion-card>
-  <ion-button style="width: 300px;float: right;margin-right: 10px" routerLink='/myscores' (click)="submitScore()" color="primary">Check Scores</ion-button><br><br>
+  </ion-card>   
 </ion-content>

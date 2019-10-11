@@ -9,6 +9,7 @@ const routes: Routes = [
   { path: 'who-said', loadChildren: './who-said/who-said.module#WhoSaidPageModule' },
   { path: 'play-q', loadChildren: './play-q/play-q.module#PlayQPageModule' },
   { path: 'myscores', loadChildren: './myscores/myscores.module#MyscoresPageModule' },
+  { path: 'profiles', loadChildren: './profiles/profiles.module#ProfilesPageModule' },
 ];
 
 @NgModule({

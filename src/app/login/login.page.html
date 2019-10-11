@@ -1,57 +1,31 @@
- <!-- <form [formGroup]="loginForm">
-          Email <ion-input style="background-color: #95b911;border: solid  2px;width: 300px; border-radius: 10px 10px ;" [(ngModel)]="email"  placeholder="fanamoore@gmail.com">
-        </ion-input>
-  </form> -->
-  <ion-header>
-      <ion-toolbar color="primary">
-        <ion-title><img style="border-radius: 50%;" src="assets\africa.jpg" width="80" height="80">Login</ion-title>
-      </ion-toolbar>
-    </ion-header>
-    
-    <!-- <ion-content style="border-bottom: #2a700e solid 40px " color="secondary">
-      <ion-card color="primary">
-        <ion-card-header>
-          <ion-card-title> African Revolution </ion-card-title>
-        </ion-card-header>
-      
-        <ion-card-content>
-       
-          Email <ion-input style="background-color: #95b911;border: solid  2px;width: 300px; border-radius: 10px 10px ;" [(ngModel)]="email" placeholder="fanamoore@gmail.com"></ion-input><br>
-          Password <ion-input style="background-color: #95b911;border: solid  2px;width: 300px; border-radius: 10px 10px " [(ngModel)]="password" type="Password" required></ion-input>
-        </ion-card-content>
-      </ion-card>
-      <a style="margin-left: 20px" routerLink='/register'>Create new Account</a>
-          <ion-button style="float: right; width: 120px;margin-right: 10px" (click)="login()" routerLink='/home' color="primary">Login</ion-button><br>
-           <ion-button style=" text-align: center;width: 300px" (click)="resetpass()" color="primary">Forgot Passsword</ion-button><br><br>
-    </ion-content> -->
-    
-     <ion-content style="border-bottom: #2a700e solid 40px " color="secondary">
-    
-        <ion-card color="primary">
-          <ion-card-header>
-            <ion-card-title> African Revolution </ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-             <!-- <form [formGroup]="loginForm"> -->
-            Email <ion-input style="background-color: #95b911;border: solid  2px;width: 300px; border-radius: 10px 10px ;" [(ngModel)]="email"  placeholder="fanamoore@gmail.com">
+<ion-header>
+    <ion-toolbar color="primary">
+      <ion-title><img style="border-radius: 50%; margin-left: 10px;text-align: center" src="assets\africa.jpg" width="80" height="80">African Revolution.</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content style="border-bottom: #2C5F2D solid 40px "  color="secondary">
+ <form [formGroup]="loginForm" >
+    <ion-card color="primary">
+        <ion-card-title style="text-align: center">Login.</ion-card-title>
+         <ion-input style="background-color: #97BC62FF;border: solid  2px;width: 250px; border-radius: 10px 10px ;" [(ngModel)]="email" formControlName="email" [class.invalid]="!loginForm.controls['email'].valid &&
+            loginForm.controls['email'].touched"   placeholder="Email"><ion-icon name="mail"></ion-icon>
           </ion-input>
-          <!-- formControlName="email" [class.invalid]="!loginForm.controls['email'].valid &&
-            loginForm.controls['email'].touched" 
-           <ion-item class="error-message" *ngIf="!loginForm.controls['email'].valid && loginForm.controls['email'].touched">
-            <ion-label>Please enter a valid email address.</ion-label>
-          </ion-item><br>-->
-            Password <ion-input style="background-color: #95b911;border: solid  2px;width: 300px; border-radius: 10px 10px " [(ngModel)]="password"  type="Password" placeholder="********" required></ion-input>
-             <!-- formControlName="password" [class.invalid]="!loginForm.controls['password'].valid&& 
-            loginForm.controls['password'].touched"  
-             <ion-item class="error-message" *ngIf="!loginForm.controls['password'].valid && loginForm.controls['password'].touched" >
-            <ion-label>Your password needs more than 8 characters.</ion-label>  -->
-          <!-- </form> -->
-          </ion-card-content>
+          <ion-item class="error-message" *ngIf="!loginForm.controls['email'].valid && loginForm.controls['email'].touched">
+              <ion-label>Please enter a valid email address.</ion-label>
+            </ion-item><br>
+
+         <ion-input style="background-color:#97BC62FF;border: solid  2px;width: 250px; border-radius: 10px 10px " [(ngModel)]="password" formControlName="password" [class.invalid]="!loginForm.controls['password'].valid&& 
+            loginForm.controls['password'].touched"  type="Password" placeholder="Password"><ion-icon name="lock"></ion-icon>
+          </ion-input> 
+          <ion-item class="error-message" *ngIf="!loginForm.controls['password'].valid && loginForm.controls['password'].touched" >
+              <ion-label>Your password needs more than 8 characters.</ion-label>
+              </ion-item><br>
+       
+        
+          <ion-button style=" text-align: center;width: 220px;margin-left: 30px" (click)="login()" [disabled]="!loginForm.valid" color="secondary"><ion-icon name="log-in"></ion-icon>Sign-in</ion-button><br>
+          <br>
+          <ion-button style=" text-align: center;width: 220px;margin-left: 30px "  (click)="resetpass()" color="secondary"><ion-icon name="help-circle"></ion-icon>Forgot Password</ion-button><br><br>
         </ion-card>
-        <a style="margin-left: 20px" routerLink='/register'>Create new Account</a>
-         <!-- <ion-button style="float: right; width: 120px;margin-right: 10px" (click)="login(loginForm)" [disabled]="!loginForm.valid" routerLink='/home' color="primary">Login</ion-button><br> -->
-            <ion-button style="float: right; width: 120px;margin-right: 10px" (click)="login()" routerLink='/home' color="primary">Login</ion-button><br>
-            <ion-button style=" text-align: center;width: 300px;margin-left: 10px" (click)="resetpass()" color="primary">Forgot Passsword</ion-button><br><br>
-         
-             
+        <a style="margin-left: 20px; color :#2C5F2D" fill="clear" routerLink='/register'>Create new Account</a>
+        </form>
       </ion-content>

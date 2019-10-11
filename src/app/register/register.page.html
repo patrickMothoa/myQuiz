@@ -5,40 +5,59 @@
 </ion-header>
 
 <ion-content color="secondary">
+    <form [formGroup]="registerForm" >
     <ion-card color="primary">
         <ion-card-header>
           <ion-card-title>User Information.</ion-card-title>
         </ion-card-header>
 
     <ion-card-content>
-    Name <ion-input [(ngModel)]="name" placeholder="enter name" ></ion-input><br>
-    Age <ion-input [(ngModel)]="age" placeholder="enter age" ></ion-input><br>
-    <ion-list>
-      <ion-radio-group  (ionChange) = "getGender($event)">
+    Name <ion-input style="background-color: #97BC62FF;border: solid  2px;width: 250px; border-radius: 10px 10px ;" [(ngModel)]="name" formControlName="name" [class.invalid]="!registerForm.controls['name'].valid &&
+    registerForm.controls['name'].touched" placeholder="enter name" ></ion-input>
+    <ion-item class="error-message" *ngIf="!registerForm.controls['name'].valid && registerForm.controls['name'].touched">
+        <ion-label>Please enter your name.</ion-label>
+      </ion-item><br>
+    Age <ion-input style="background-color: #97BC62FF;border: solid  2px;width: 250px; border-radius: 10px 10px ;" [(ngModel)]="age" formControlName="age" [class.invalid]="!registerForm.controls['age'].valid &&
+    registerForm.controls['age'].touched" #input maxLength="3" placeholder="enter age" ></ion-input>
+    <ion-item class="error-message" *ngIf="!registerForm.controls['age'].valid && registerForm.controls['age'].touched">
+        <ion-label>Please enter your age.</ion-label>
+      </ion-item><br>
+    <ion-list >
+      <ion-radio-group   formControlName="gender"  (ionChange) = "getGender($event)">
         <ion-list-header >
           <ion-label>Gender</ion-label>
         </ion-list-header>
     
-        <ion-item>
-          <ion-label>Male</ion-label>
-          <ion-radio  slot="start" value=1 checked></ion-radio>
+        <ion-item >
+          <ion-label >Male</ion-label>
+          <ion-radio  slot="start" value="male" ></ion-radio>
         </ion-item>
     
         <ion-item>
           <ion-label>Female</ion-label>
-          <ion-radio slot="start" value=2></ion-radio>
+          <ion-radio slot="start" value="female"></ion-radio>
         </ion-item>
         <ion-item>
           <ion-label>Others</ion-label>
-          <ion-radio slot="start" value=3></ion-radio>
+          <ion-radio slot="start" value="Others"></ion-radio>
         </ion-item>
       </ion-radio-group>
     </ion-list><br>
-    Email <ion-input [(ngModel)]="email" placeholder="enter email" ></ion-input><br>
-    Password <ion-input [(ngModel)]="password"  type="password" style="background-color: #95b911;border: solid  2px;width: 300px; border-radius: 10px 10px "></ion-input>
+    Email <ion-input style="background-color: #97BC62FF;border: solid  2px;width: 250px; border-radius: 10px 10px ;" [(ngModel)]="email"  formControlName="email" [class.invalid]="!registerForm.controls['email'].valid &&
+    registerForm.controls['email'].touched" placeholder="enter email" ></ion-input><br>
+    <ion-item class="error-message" *ngIf="!registerForm.controls['email'].valid && registerForm.controls['email'].touched">
+        <ion-label>Please enter correctly formatted email address.</ion-label>
+      </ion-item><br>
+    Password <ion-input [(ngModel)]="password"  type="password" placeholder="Password" style="background-color: #97BC62FF;border: solid  2px;width: 250px; border-radius: 10px 10px ;"
+    formControlName="password" [class.invalid]="!registerForm.controls['password'].valid &&
+    registerForm.controls['password'].touched"></ion-input>
+    <ion-item class="error-message" *ngIf="!registerForm.controls['password'].valid && registerForm.controls['password'].touched">
+        <ion-label>Password must contain 8 charecters long, include numbers, special-charecters lower and Upper cases..</ion-label>
+      </ion-item><br>
     
   </ion-card-content>
 </ion-card>
 <a style="margin-left: 20px" routerLink='/login'> Back to Login..</a>
-<ion-button style="float: right; width: 150px;margin-right: 10px" (click)="register()" color="primary">submit</ion-button><br>
+<ion-button style="float: right; width: 150px;margin-right: 10px" (click)="register()" [disabled]="!registerForm.valid" color="primary">submit</ion-button><br>
+</form>
 </ion-content>
